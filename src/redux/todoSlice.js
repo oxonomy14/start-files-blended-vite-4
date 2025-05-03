@@ -9,6 +9,8 @@ const initialState = {
   isEdit: false,
 };
 
+export const selectTodos = state => state.todoSlice.todos.items;
+
 const slice = createSlice({
   name: 'todoSlice',
   initialState,
