@@ -1,37 +1,28 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
-  todos: {
-    items: [],
-    currentTodo: null,
-  },
-  counter: 1,
+  items: [],
+  currentTodo: null,
+
   isEdit: false,
 };
 
-export const selectTodos = state => state.todoSlice.todos.items;
+export const selectTodos = state => state.todoSlice.items;
 
 const slice = createSlice({
   name: 'todoSlice',
   initialState,
   reducers: {
     addTodo: (state, action) => {
-      const newTodo = {
-        ...action.payload,
-        counter: state.counter,
-      };
-      state.todos.items.push(newTodo);
-      state.counter += 1;
+      state.items.push(action.payload);
     },
 
     deleteTodo: (state, action) => {
-      state.todos.items = state.todos.items.filter(
-        item => item.id !== action.payload,
-      );
+      state.items = state.items.filter(item => item.id !== action.payload);
     },
 
     editTodo: (state, action) => {
-      state.todos.items = state.todos.items.map(item =>
+      state.items = state.items.map(item =>
         item.id === action.payload.id
           ? { ...item, text: action.payload.text }
           : item,
@@ -42,7 +33,8 @@ const slice = createSlice({
       state.isEdit = action.payload;
     },
     setCurrentTodo: (state, action) => {
-      state.todos.currentTodo = action.payload;
+      state.currentTodo = action.payload;
+      console.log('CurrentTodo:', state.currentTodo);
     },
   },
 });

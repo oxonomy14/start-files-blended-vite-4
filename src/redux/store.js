@@ -17,6 +17,7 @@ const persistConfigTodos = {
   key: 'todos',
   version: 1,
   storage,
+  whitelist: ['items'],
 };
 
 export const store = configureStore({

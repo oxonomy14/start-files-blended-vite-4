@@ -4,7 +4,7 @@ import Section from './components/Section/Section';
 import Text from './components/Text/Text';
 import Form from './components/Form/Form';
 import Filter from './components/Filter/Filter';
-import Todo from './components/Todo/Todo';
+import TodoList from './components/TodoList/TodoList';
 import EditForm from './components/EditForm/EditForm';
 
 import { useSelector } from 'react-redux';
@@ -21,7 +21,7 @@ export const App = () => {
           {!isEdit ? <Form /> : <EditForm />}
 
           <Filter />
-          <Todo />
+          <TodoList />
         </Container>
       </Section>
     </>

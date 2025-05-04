@@ -1,44 +1,46 @@
 import Text from '../Text/Text';
-import Grid from '../Grid/Grid';
-import GridItem from '../GridItem/GridItem';
-import TodoList from '../TodoList/TodoList';
-import { useSelector } from 'react-redux';
-import { selectfilteredTodoMemo } from '../../redux/filterSlice';
+import style from './Todo.module.css';
+import { RiDeleteBinLine } from 'react-icons/ri';
+import { RiEdit2Line } from 'react-icons/ri';
+import { deleteTodo, setIsEdit, setCurrentTodo } from '../../redux/todoSlice';
+import { useDispatch } from 'react-redux';
 
-const Todo = () => {
-  //const todosData = useSelector(state => state.todoSlice.todos.items);
+const Todo = ({ id, text, counter }) => {
+  const dispatch = useDispatch();
 
-  const todos = useSelector(selectfilteredTodoMemo);
+  const handleDeleteTodo = () => {
+    dispatch(deleteTodo(id));
+  };
 
-  //const filter = useSelector(state => state.filterSlice.filter);
-
-  // Фільтрація
-  //const filteredTodo = todosData.filter(item =>
-  //  item.text.toLowerCase().includes(filter.toLowerCase()),
-  //);
+  const handleEditTodo = () => {
+    dispatch(setCurrentTodo({ id, text }));
+    dispatch(setIsEdit(true));
+  };
 
   return (
     <>
-      {todos.length === 0 ? (
-        <Text textAlign="center">No todos yet. Add anyone</Text>
-      ) : (
-        <>
-          <Text textAlign="center" marginBottom="20">
-            TODO
-          </Text>
-          <Grid>
-            {todos.map(todo => (
-              <GridItem key={todo.id}>
-                <TodoList
-                  id={todo.id}
-                  text={todo.text}
-                  counter={todo.counter}
-                />
-              </GridItem>
-            ))}
-          </Grid>
-        </>
-      )}
+      {/*<Text textAlign="center">We did not find any todo😯</Text>*/}
+      <div className={style.box}>
+        <Text textAlign="center" marginBottom="20">
+          TODO # {counter}
+        </Text>
+
+        <Text>{text}</Text>
+        <button
+          className={style.deleteButton}
+          type="button"
+          onClick={() => handleDeleteTodo()}
+        >
+          <RiDeleteBinLine size={24} />
+        </button>
+        <button
+          className={style.editButton}
+          type="button"
+          onClick={handleEditTodo}
+        >
+          <RiEdit2Line size={24} />
+        </button>
+      </div>
     </>
   );
 };

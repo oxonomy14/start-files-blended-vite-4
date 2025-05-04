@@ -11,7 +11,7 @@ const slice = createSlice({
   initialState,
   reducers: {
     filterTodo: (state, action) => {
-      console.log(action.payload);
+      //console.log(action.payload);
       state.filter = action.payload;
     },
   },
